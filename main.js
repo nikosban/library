@@ -54,6 +54,7 @@ function createItem () {
         bookPages.textContent = bookItem.pages;
         removeBtn.textContent = "Remove";
         removeBtn.className = "removeBtn";
+        removeBtn.setAttribute("data-id", bookItem.id);
 
         itemBox.appendChild(bookTitle);
         itemBox.appendChild(bookAuthor);
@@ -69,12 +70,17 @@ function createItem () {
 //remove a book
 const rmvBtn = Array.from(document.getElementsByClassName("removeBtn"));
 
-rmveBtn.forEach((button) => {
+rmvBtn.forEach((button) => {
     button.addEventListener("click", () => {
-        removeItem()
+        const itemID = button.getAttribute("data-id")
+        removeItem(itemID);
     })
 })
 
+function removeItem(itemID) {
+    const index = library.findIndex(book => book.id === itemID);
+    console.log(index);
+}
 
 //show the modal
 document.getElementById("addBtn").addEventListener("click", () => {
