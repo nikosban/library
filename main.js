@@ -1,44 +1,42 @@
-const bookTitle = document.getElementById("title");
-const bookAuthor = document.getElementById("author");
-const bookPages = document.getElementById("pages");
-const bookRead = document.getElementById("read");
-const submitButton = document.getElementById("submit");
+//dialog box
+const dialog = document.getElementById("addModal");
 
-submitButton.addEventListener("click", () => {
-    createBook();
-})
+//initiate the library array
+const library = [];
 
-
-//initialise the library
-let library = [];
-
-
-//initialise the constructor
+//create the book object
 function Book (title, author, pages, read) {
-
     this.title = title,
     this.author = author,
     this.pages = pages,
     this.read = read;
 }
 
-function createBook() {
+//create a book based on input
+function createBook () {
     const newBook = new Book (
-        title = bookTitle.value,
-        author = bookAuthor.value,
-        pages = bookPages.value,
-        read = bookRead.checked
-    )
+         document.getElementById("title").value,
+         document.getElementById("author").value,
+         document.getElementById("pages").value,
+         document.getElementById("read").checked
+    );
 
+    //add book to library
     addBook(newBook);
 }
 
-
-// add book to library
-function addBook (newBook) {
-
+//add book to the library
+function addBook(newBook) {
     library.push(newBook);
-    console.log(library);
+    console.log(library)
 }
 
+document.getElementById("addBtn").addEventListener("click", () => {
+    dialog.showModal();
+})
 
+document.getElementById("submit").addEventListener("click", (event) => {
+    event.preventDefault();
+    createBook();
+    dialog.close();
+})

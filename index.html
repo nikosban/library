@@ -6,24 +6,42 @@
     <title>Library</title>
 </head>
 <body>
-    <div>
-        <label for="title"></label>
-        <input type="text" id="title" placeholder="title">
-    </div>
-    <div>
-        <label for="author"></label>
-        <input type="text" id="author" placeholder="author">
-    </div>
-    <div>
-        <label for="pages"></label>
-        <input type="number" id="pages" placeholder="pages">
-    </div>
-    <div>
-        <label for="read"></label>
-        <input type="checkbox" id="read" placeholder="pages">
-    </div>
 
-    <button type="button" id="submit" >Add</button>
+    <header>
+        <div class="header">
+            <h1>Library</h1>
+            <p>Manage your book collection in one place</p>    
+        </div>
+        <button type="button" id="addBtn" class="prmBtn">Add Book</button>
+    </header>
+
+    <dialog id="addModal">
+        <h2>Add a book</h2>
+        <p>Enter the information of your book.</p>
+        <form>
+            <div>
+                <label for="title"></label>
+                <input type="text" id="title" placeholder="title">
+            </div>
+            <div>
+                <label for="author"></label>
+                <input type="text" id="author" placeholder="author">
+            </div>
+            <div>
+                <label for="pages"></label>
+                <input type="number" id="pages" placeholder="pages">
+            </div>
+            <div>
+                <label for="read"></label>
+                <input type="checkbox" id="read" placeholder="pages">
+            </div>
+        
+            <button type="submit" id="submit" >Add</button>        
+        </form>
+    </dialog>
+
+
+    <div id="bookArea"></div>
 
     <script src="./main.js"></script>
 </body>
