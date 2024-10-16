@@ -34,27 +34,33 @@ function createBook () {
 function addBook(newBook) {
     library.push(newBook);
     console.log(library)
-
-    createItem();
+    
+    createItem(newBook);
 }
 
 //create the book in the ui
-function createItem () {
+function createItem (newBook) {
     const bookArea = document.getElementById("bookArea");
 
-    library.forEach((bookItem) => {
+  
         const itemBox = document.createElement("div")
         const bookTitle = document.createElement("h5");
         const bookAuthor = document.createElement("p");
         const bookPages = document.createElement("p");
         const removeBtn = document.createElement("button")
 
-        bookTitle.textContent = bookItem.title;
-        bookAuthor.textContent = `by ${bookItem.author}`;
-        bookPages.textContent = bookItem.pages;
+        bookTitle.textContent = newBook.title;
+        bookAuthor.textContent = `by ${newBook.author}`;
+        bookPages.textContent = newBook.pages;
         removeBtn.textContent = "Remove";
         removeBtn.className = "removeBtn";
-        removeBtn.setAttribute("data-id", bookItem.id);
+        removeBtn.setAttribute("data-id", newBook.id);
+
+        removeBtn.addEventListener("click", () => {
+            const position = event.target.dataset.id;
+            removeItem(position, itemBox);
+        })
+
 
         itemBox.appendChild(bookTitle);
         itemBox.appendChild(bookAuthor);
@@ -62,24 +68,23 @@ function createItem () {
         itemBox.appendChild(removeBtn);
 
         bookArea.appendChild(itemBox);
-    
-    });
+
+        
+
 
 }
 
-//remove a book
-const rmvBtn = Array.from(document.getElementsByClassName("removeBtn"));
 
-rmvBtn.forEach((button) => {
-    button.addEventListener("click", () => {
-        const itemID = button.getAttribute("data-id")
-        removeItem(itemID);
-    })
-})
 
-function removeItem(itemID) {
-    const index = library.findIndex(book => book.id === itemID);
-    console.log(index);
+//remove item
+function removeItem(position, itemBox) {
+    const index = library.findIndex(book => book.id == position);
+
+    if (index != -1) {
+        library.splice(index, 1);
+        itemBox.remove();
+    }
+    console.log(library);
 }
 
 //show the modal
